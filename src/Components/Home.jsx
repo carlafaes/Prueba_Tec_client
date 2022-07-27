@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InfoForm from "./infoForm";
+import ArrInfo from "./ArrInfo";
+
 
 export default function Home() {
   const [info,setInfo]=useState(null);
@@ -41,6 +43,7 @@ export default function Home() {
     <div>
       <h1>Home</h1>
      <InfoForm onChangeInfo={handleChangeInfo}/>
+     <ArrInfo lisInfo={listInfo}/>
     </div>
   );
 }
