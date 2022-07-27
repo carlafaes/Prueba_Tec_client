@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from "react";
+import InfoForm from "./infoForm";
 
 export default function Home() {
-  const [word, setWord] = useState("");
-  console.log(word, 'word');
+  const [info,setInfo]=useState(null);
+  console.log(info,'info')
+  let [listInfo,setListInfo]=useState([])
+  console.log(listInfo,'listInfo')
 
   useEffect(() => {
     searchWords();
-
   }, []);
 
-  async function searchWords(word = 'heeh') {
-    const request = await fetch(`https://prueba-tec-api.herokuapp.com/api?word=${word}`);
-    const data = await request.json();
-    console.log(data, 'data');
-    setWord(data);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setWord(e.target.value);
+  const arrInfo= ()=>{
+    return setListInfo([...listInfo,info])
 
   }
+ 
+ 
+  function handleChangeInfo(words){
+    setInfo(null);
+    searchWords(words);
+    arrInfo()
+  }
+
+  async function searchWords(words='oso') {
+    try{
+
+      const request = await fetch(`https://prueba-tec-api.herokuapp.com/api?word=${words}`);
+      const data = await request.json();
+      console.log(data, 'data');
+      setInfo(data);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  
   return (
     <div>
       <h1>Home</h1>
-      <input type="text" value={word} onChange={handleSubmit} />
+     <InfoForm onChangeInfo={handleChangeInfo}/>
     </div>
   );
 }
