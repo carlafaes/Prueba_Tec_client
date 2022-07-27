@@ -12,6 +12,10 @@ export default function Home() {
   useEffect(() => {
     searchWords();
   }, []);
+  
+  useEffect(() => {
+    setListInfo(listInfo)
+  },[listInfo]);
 
   const arrInfo= ()=>{
     return setListInfo([...listInfo,info])
