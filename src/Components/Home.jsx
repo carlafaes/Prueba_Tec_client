@@ -14,11 +14,18 @@ export default function Home() {
   }, []);
   
   useEffect(() => {
-    setListInfo(listInfo)
-  },[listInfo]);
+    console.log(listInfo,'listInfo')
+    if(info){
+      setListInfo([...listInfo,info])
+    }
+  },[info]);
 
   const arrInfo= ()=>{
-    return setListInfo([...listInfo,info])
+    if(!info){
+      return;
+    }
+    const newInfo=listInfo.concat(info);
+    return setListInfo(newInfo);
 
   }
  
@@ -26,10 +33,9 @@ export default function Home() {
   function handleChangeInfo(words){
     setInfo(null);
     searchWords(words);
-    arrInfo()
   }
 
-  async function searchWords(words='oso') {
+  async function searchWords(words='') {
     try{
 
       const request = await fetch(`https://prueba-tec-api.herokuapp.com/api?word=${words}`);
@@ -46,8 +52,8 @@ export default function Home() {
   return (
     <div>
       <h1>Home</h1>
-     <InfoForm onChangeInfo={handleChangeInfo}/>
-     <ArrInfo lisInfo={listInfo}/>
+     <InfoForm onChangeInfo={handleChangeInfo} arrInfo={arrInfo}/>
+     <ArrInfo lisInfo={listInfo} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-export default function InfoForm({ onChangeInfo}) {
+export default function InfoForm({ onChangeInfo,arrInfo }) {
 const [words, setWords] = useState("");
 console.log(words,'words')
 
@@ -19,6 +19,7 @@ const handleChange=(e)=>{
 const handleSubmit = (e)=>{
     e.preventDefault();
     onChangeInfo(words)
+    arrInfo({words})
 }
     return [
         <div>
