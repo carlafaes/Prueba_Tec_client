@@ -31,8 +31,7 @@ export default function Home() {
 
   
   return (
-    <div>
-      <h1>Home</h1>
+    <div style={{backgroundColor:'#aca2a2',height:'100vh'}}>
      <InfoForm onChangeInfo={handleChangeInfo}  value={info}/>
      <ArrInfo listInfo={listInfo}  />
     </div>
