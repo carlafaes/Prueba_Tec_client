@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function ArrInfo({lisInfo}){
+export default function ArrInfo({listInfo}){
 
     return(
         <div>
             <h1>ArrInfo</h1>
-           {lisInfo? lisInfo.map((item,index)=>{
+           {listInfo.length !== undefined? listInfo.map((item,index)=>{
                 return(
                      <div key={index}>
                           <p>{item.text}</p>

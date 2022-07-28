@@ -8,40 +8,21 @@ export default function Home() {
   console.log(info,'info')
   let [listInfo,setListInfo]=useState([])
   console.log(listInfo,'listInfo')
-
-  useEffect(() => {
-    searchWords();
-  }, []);
-  
-  useEffect(() => {
-    console.log(listInfo,'listInfo')
-    if(info){
-      setListInfo([...listInfo,info])
-    }
-  },[info]);
-
-  const arrInfo= ()=>{
-    if(!info){
-      return;
-    }
-    const newInfo=listInfo.concat(info);
-    return setListInfo(newInfo);
-
-  }
  
  
-  function handleChangeInfo(words){
+  function handleChangeInfo(info){
+    searchWords(info);
     setInfo(null);
-    searchWords(words);
   }
 
-  async function searchWords(words='') {
+  async function searchWords(info) {
     try{
 
-      const request = await fetch(`https://prueba-tec-api.herokuapp.com/api?word=${words}`);
+      const request = await fetch(`https://prueba-tec-api.herokuapp.com/api?word=${info}`);
       const data = await request.json();
       console.log(data, 'data');
       setInfo(data);
+      setListInfo([...listInfo,data]);
     }
     catch(error){
       console.log(error);
@@ -52,8 +33,8 @@ export default function Home() {
   return (
     <div>
       <h1>Home</h1>
-     <InfoForm onChangeInfo={handleChangeInfo} arrInfo={arrInfo}/>
-     <ArrInfo lisInfo={listInfo} />
+     <InfoForm onChangeInfo={handleChangeInfo}  value={info}/>
+     <ArrInfo listInfo={listInfo}  />
     </div>
   );
 }
